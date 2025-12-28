@@ -1,30 +1,54 @@
 {
   "expo": {
-    "name": "fitness-tracker",
-    "slug": "fitness-tracker",
+    "name": "RepRecord",
+    "slug": "fitform_reprecord",
+    "scheme": "reprecord",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#121212"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.reprecord.app",
+      "buildNumber": "1",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#121212",
+        "googleServicesFile": "./google-services.json"
       },
+      "package": "com.reprecord.app",
+      "versionCode": 1,
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-sqlite",
+      [
+        "@react-native-google-signin/google-signin",
+        {
+          "iosUrlScheme": "com.googleusercontent.apps.708122173666-2ht4uokdafvjnasnv3j36f72duk9ednr"
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "8641e395-5b31-4841-a40d-b95e3671199f"
+      }
+    },
+    "owner": "fitform_health"
   }
 }

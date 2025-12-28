@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "708122173666",
+    "project_id": "reprecord-33355",
+    "storage_bucket": "reprecord-33355.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:708122173666:android:1f3887465cea87c6907ebb",
+        "android_client_info": {
+          "package_name": "com.reprecord.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "708122173666-j8a27svfr8jq5m9lsv5k80sfhm634fgq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0wAnEYUB8q2FpGgaT5rqrM_HLspco5tg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "708122173666-j8a27svfr8jq5m9lsv5k80sfhm634fgq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "708122173666-2ht4uokdafvjnasnv3j36f72duk9ednr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.reprecord.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
