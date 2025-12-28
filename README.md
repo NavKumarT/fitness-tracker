@@ -7,7 +7,7 @@
 
 ---
 
-## 🚀 Key Technical Achievements (For Hiring Managers)
+## Key Technical Achievements (For Hiring Managers)
 
 *   **Offline-First Architecture**: Engineered a robust local-first data layer using **SQLite**, enabling zero-latency interactions regardless of network status.
 *   **Custom Synchronization Engine**: Developed a proprietary two-way sync protocol to merge local SQLite datasets with **Firebase Firestore**, handling conflict resolution and ensuring eventual consistency.
@@ -17,7 +17,7 @@
 
 ---
 
-## 🛠️ Technology Stack (ATS Optimized)
+## Technology Stack (ATS Optimized)
 
 ### Core Framework & Language
 *   **React Native (Expo SDK 54)**: For cross-platform native rendering.
@@ -25,15 +25,15 @@
 
 ### Data & State
 *   **SQLite (expo-sqlite)**: Embedded relational database for offline persistence.
-*   **Firebase (Firestore & Auth)**: scalable NoSQL cloud backend and secure authentication.
+*   **Firebase (Firestore & Auth)**: Scalable NoSQL cloud backend and secure authentication.
 *   **Zustand**: Lightweight, scalable state management with persist middleware.
-*   **TanStack Query (Pattern)**: Employed concepts for efficient data fetching and caching (in data layer logic).
+*   **TanStack Query (Pattern)**: Employed concepts for efficient data fetching and caching.
 
 ### UI & Performance
 *   **React Native Reanimated 3**: High-performance, declarative animations run on the native UI thread.
 *   **Expo Linear Gradient**: Hardware-accelerated gradient rendering.
 *   **Lucide React Native**: Consistent, lightweight vector iconography.
-*   **NativeWind / TailwindCSS**: Utility-first styling for rapid UI iteration (configured).
+*   **NativeWind / TailwindCSS**: Utility-first styling for rapid UI iteration.
 
 ### Authentication & Security
 *   **Google Sign-In**: Native OAuth integration.
@@ -41,17 +41,17 @@
 
 ---
 
-## 🏗️ Project Architecture
+## Project Architecture
 
 ### The "Sync Engine"
-The heart of RepRecord is its custom sync service located in `src/services/SyncService.ts`. unlike standard CRUD apps, RepRecord reads and writes primarily to a local SQLite database. A background service monitors network connectivity (via `expo-network`) and initiates a sync queue when online, pushing `DIRTY` records to Firestore and pulling updates.
+The heart of RepRecord is its custom sync service located in `src/services/SyncService.ts`. Unlike standard CRUD apps, RepRecord reads and writes primarily to a local SQLite database. A background service monitors network connectivity (via `expo-network`) and initiates a sync queue when online, pushing `DIRTY` records to Firestore and pulling updates.
 
 ### Feature Flagging
 Built with continuous delivery in mind, feature flags (`src/config/featureFlags.ts`) control the rollout of complex features like Cloud Sync and V2 Home Screen layouts, allowing for safe testing in production environments.
 
 ---
 
-## 🏃‍♂️ Getting Started
+## Getting Started
 
 1.  **Clone the repository**
     ```bash
@@ -70,7 +70,7 @@ Built with continuous delivery in mind, feature flags (`src/config/featureFlags.
 
 ---
 
-## 🔧 Future Roadmap
+## Future Roadmap
 
 *   **Haptic Feedback**: Integrating `expo-haptics` for tactile confirmation of workout sets.
 *   **Wearable Integration**: HealthKit / Google Fit synchronization.
