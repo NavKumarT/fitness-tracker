@@ -3,7 +3,9 @@
 
 **RepRecord** is a high-performance, offline-first mobile application architected to solve the connectivity gap in fitness tracking. By implementing a sophisticated synchronization engine, it allows users to experience native speed with local interactions while ensuring data integrity via background cloud syncing.
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg) ![Platform](https://img.shields.io/badge/platform-iOS%20%7C%20Android-lightgrey) ![Tech](https://img.shields.io/badge/stack-React%20Native%20%7C%20TypeScript-blue)
+![License](https://img.shields.io/badge/license-Proprietary-red.svg) ![Platform](https://img.shields.io/badge/platform-iOS%20%7C%20Android-lightgrey) ![Tech](https://img.shields.io/badge/stack-React%20Native%20%7C%20TypeScript-blue)
+
+> **⚠️ COPYRIGHT NOTICE**: This repository contains proprietary code intended solely for portfolio evaluation purposes. Unauthorized commercial use, modification, or redistribution is strictly prohibited. See `LICENSE` for details.
 
 ---
 
