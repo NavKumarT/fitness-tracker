@@ -16,11 +16,10 @@ I got tired of paying premium prices for subpar software. Most fitness apps are 
 [ **📲 Download the APK (Try it yourself)**](https://drive.google.com/file/d/11zkXwSaR4LC8iTXYcOVcM6RQYG69GnfR/view?usp=sharing)
 
 <p float="left">
-  <img src="assets/onboarding_intro.jpg" width="19%" />
-  <img src="assets/onboarding_select.jpg" width="19%" />
-  <img src="assets/schedule_builder.jpg" width="19%" />
-  <img src="assets/home_scheduled.jpg" width="19%" />
-  <img src="assets/home_adhoc.jpg" width="19%" />
+  <img src="assets/onboarding_intro.jpg" width="22%" />
+  <img src="assets/onboarding_select.jpg" width="22%" />
+  <img src="assets/schedule_builder.jpg" width="22%" />
+  <img src="assets/home_scheduled.jpg" width="22%" />
 </p>
 
 <p float="left">
