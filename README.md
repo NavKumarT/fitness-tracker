@@ -17,7 +17,7 @@
 
 ---
 
-## Technology Stack (ATS Optimized)
+## Technology Stack
 
 ### Core Framework & Language
 *   **React Native (Expo SDK 54)**: For cross-platform native rendering.
