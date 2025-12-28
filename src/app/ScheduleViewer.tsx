@@ -34,7 +34,8 @@ export default function ScheduleViewer() {
         useCallback(() => {
             const active = getActiveScheduleId();
             if (active) {
-                setSchedule(active);
+                // Force a fresh object to ensure state update if properties changed
+                setSchedule({ ...active });
                 setUnits(getScheduleWithExercises(active.id));
             }
         }, [])

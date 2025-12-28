@@ -13,7 +13,7 @@
 
 I got tired of paying premium prices for subpar software. Most fitness apps are slow, bloated, or hide basic features behind a paywall. I constructed RepRecord to prove it could be done better: native performance, offline-first reliability, and zero compromises. I didn't find a tracking app worthy of my workouts, so I engineered one.
 
-[ **📲 Download the APK (Try it yourself)**](https://drive.google.com/file/d/1Wg0V1_keDN5-i6STAAa7jOJrkJt81GJX/view)
+[ **📲 Download the APK (Try it yourself)**](https://drive.google.com/file/d/11zkXwSaR4LC8iTXYcOVcM6RQYG69GnfR/view?usp=sharing)
 
 ---
 

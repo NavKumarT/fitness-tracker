@@ -57,7 +57,7 @@ export default function TipCard({ message, onDismiss, delay = 1000, style }: Pro
                 </View>
 
                 <View style={{ flex: 1 }}>
-                    <Text style={{ ...typography.caption, color: colors.text.primary, lineHeight: 20 }}>
+                    <Text style={{ ...typography.caption, color: colors.text.primary, lineHeight: 20, flexWrap: 'wrap' }}>
                         {message}
                     </Text>
                 </View>
