@@ -9,8 +9,15 @@
 
 ---
 
-## Key Technical Achievements (For Hiring Managers)
+## Why I Built RepRecord
 
+I got tired of paying premium prices for subpar software. Most fitness apps are slow, bloated, or hide basic features behind a paywall. I constructed RepRecord to prove it could be done better: native performance, offline-first reliability, and zero compromises. I didn't find a tracking app worthy of my workouts, so I engineered one.
+
+[ **📲 Download the APK (Try it yourself)**](https://drive.google.com/file/d/1Wg0V1_keDN5-i6STAAa7jOJrkJt81GJX/view)
+
+---
+
+## Key Technical Achievements
 *   **Offline-First Architecture**: Engineered a robust local-first data layer using **SQLite**, enabling zero-latency interactions regardless of network status.
 *   **Custom Synchronization Engine**: Developed a proprietary two-way sync protocol to merge local SQLite datasets with **Firebase Firestore**, handling conflict resolution and ensuring eventual consistency.
 *   **Performance Optimization**: Leveraged **React Native Reanimated 3** to offload complex animations to the UI thread, achieving 60fps performance for staggered list entries and gesture-driven interactions.
@@ -56,9 +63,6 @@ Built with continuous delivery in mind, feature flags (`src/config/featureFlags.
 ## Getting Started
 
 1.  **Clone the repository**
-    ```bash
-    git clone https://github.com/yourusername/reprecord.git
-    ```
 
 2.  **Install Dependencies**
     ```bash
