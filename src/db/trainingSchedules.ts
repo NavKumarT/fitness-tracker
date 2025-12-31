@@ -2,7 +2,7 @@ import { db } from './index';
 import * as Crypto from 'expo-crypto';
 import { TrainingSchedule } from './types';
 
-export function createTrainingSchedule(type: 'weekly' | 'cycle') {
+export function createTrainingSchedule(type: 'weekly' | 'cycle', name: string) {
   const id = Crypto.randomUUID();
   const now = Date.now();
 
@@ -21,7 +21,7 @@ export function createTrainingSchedule(type: 'weekly' | 'cycle') {
     (id, name, type, current_index, is_active, created_at)
     VALUES (?, ?, ?, 0, 1, ?);
     `,
-    [id, 'Default Schedule', type, now]
+    [id, name, type, now]
   );
 
   return id;

@@ -37,7 +37,10 @@ type WeekDayConfig = {
 export default function WeeklyScheduleBuilder() {
   const navigation = useNavigation();
   const route = useRoute<any>();
+
   const colors = useThemeStore((s) => s.colors);
+
+  const [scheduleName, setScheduleName] = useState('My Weekly Plan');
 
   const [week, setWeek] = useState<WeekDayConfig[]>(
     WEEKDAYS.map((d) => ({
@@ -106,7 +109,7 @@ export default function WeeklyScheduleBuilder() {
     if (!hasWorkout) return;
 
     const scheduleId = createWeeklySchedule(
-      "Weekly Plan",
+      scheduleName,
       week.map((d) => ({
         weekday: d.weekday,
         label: d.label,
@@ -135,6 +138,24 @@ export default function WeeklyScheduleBuilder() {
         <Text style={[typography.h1, { color: colors.text.primary }]}>
           Build your training week
         </Text>
+
+        {/* Schedule Name Input */}
+        <View style={{ marginTop: spacing[6], padding: spacing[5], paddingBottom: spacing[3], borderBottomWidth: 1, borderBottomColor: colors.bg.tertiary }}>
+          <Text style={[typography.caption, { color: colors.text.muted, marginBottom: spacing[1] }]}>
+            SCHEDULE NAME
+          </Text>
+          <TextInput
+            value={scheduleName}
+            onChangeText={setScheduleName}
+            placeholder="My Weekly Plan"
+            placeholderTextColor={colors.text.muted}
+            style={{
+              ...typography.h3,
+              color: colors.text.primary,
+              padding: 0,
+            }}
+          />
+        </View>
 
         <View style={{ marginTop: spacing[6] }}>
           {WEEKDAYS.map((day) => {

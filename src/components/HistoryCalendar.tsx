@@ -7,7 +7,7 @@ type Props = {
     workoutDates: string[]; // ISO Date strings "YYYY-MM-DD"
 };
 
-const WEEKDAYS = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 export default function HistoryCalendar({ workoutDates }: Props) {
     const colors = useThemeStore((s) => s.colors);
@@ -26,10 +26,7 @@ export default function HistoryCalendar({ workoutDates }: Props) {
     const calendarGrid = useMemo(() => {
         const daysInMonth = new Date(year, month + 1, 0).getDate();
         const firstDayIndex = new Date(year, month, 1).getDay(); // 0 is Sunday
-        // Adjust so 0 is Monday (if we want Mon-Sun week)
-        // Standard JS: 0=Sun. We want 0=Mon? 
-        // If 0=Sun, then Mon=1. 
-        // Shift: let padded = index - 1. If -1, then 6.
+        // Adjust so 0 is Monday
         const startOffset = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
 
         const days: ({ val: number; matches: boolean } | null)[] = [];
@@ -41,12 +38,7 @@ export default function HistoryCalendar({ workoutDates }: Props) {
 
         // Days
         for (let i = 1; i <= daysInMonth; i++) {
-            const iso = new Date(year, month, i).toISOString().split('T')[0];
-            // Note: Use local ISO construction to avoid timezone shift issues if simplified.
-            // Better:
-            const d = new Date(year, month, i); // Local time 00:00
-            // To compare with workoutDates, we assume workoutDates are also local string "YYYY-MM-DD".
-            // Let's ensure strict formatting.
+            const d = new Date(year, month, i);
             const y = d.getFullYear();
             const m = String(d.getMonth() + 1).padStart(2, '0');
             const day = String(d.getDate()).padStart(2, '0');
@@ -77,12 +69,12 @@ export default function HistoryCalendar({ workoutDates }: Props) {
             {/* Weekdays */}
             <View style={{ flexDirection: 'row', marginBottom: spacing[2], justifyContent: 'space-between' }}>
                 {WEEKDAYS.map((d, i) => (
-                    <Text key={i} style={{ ...typography.caption, color: colors.text.muted, width: 32, textAlign: 'center' }}>{d}</Text>
+                    <Text key={i} style={{ ...typography.caption, color: colors.text.muted, width: '14.28%', textAlign: 'center', fontSize: 12 }}>{d}</Text>
                 ))}
             </View>
 
             {/* Grid */}
-            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 0 }}>
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
                 {calendarGrid.map((day, i) => (
                     <View key={i} style={{ width: '14.28%', aspectRatio: 1, alignItems: 'center', justifyContent: 'center' }}>
                         {day && (

@@ -3,6 +3,7 @@ import Profile from '../app/Profile';
 import OnboardingTrainingStyleScreen from '../app/OnboardingTrainingStyleScreen';
 import WeeklyScheduleBuilder from '../app/WeeklyScheduleBuilder';
 import CycleBuilder from '../app/CycleBuilder';
+import ScheduleViewer from '../app/ScheduleViewer';
 import { colors } from '../theme/tokens';
 
 const Stack = createNativeStackNavigator();
@@ -19,6 +20,7 @@ export default function ProfileStack() {
       <Stack.Screen name="OnboardingTrainingStyle" component={OnboardingTrainingStyleScreen} />
       <Stack.Screen name="WeeklyScheduleBuilder" component={WeeklyScheduleBuilder} />
       <Stack.Screen name="CycleBuilder" component={CycleBuilder} />
+      <Stack.Screen name="ScheduleViewer" component={ScheduleViewer} />
     </Stack.Navigator>
   );
 }

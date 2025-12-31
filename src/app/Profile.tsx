@@ -1,14 +1,17 @@
 import { View, Text, Switch, Pressable, Image, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import Screen from '../components/Screen';
-import { typography, spacing, radius } from '../theme/tokens';
+import { typography, spacing, radius, THEME_PRESETS, ThemeAccent } from '../theme/tokens';
 import { useThemeStore } from '../stores/themeStore';
 import { useAuthStore } from '../stores/authStore';
 import { getActiveTrainingSchedule } from '../db/trainingSchedules';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { SyncService } from '../services/SyncService';
 import { FEATURES } from '../config/featureFlags';
+import { ChevronDown, ChevronUp } from 'lucide-react-native';
 
-import { useNavigation } from '@react-navigation/native';
+
 
 import { useUIStore } from '../stores/uiStore';
 import { useUserStore } from '../stores/userStore';
@@ -17,6 +20,8 @@ export default function Profile() {
   const navigation = useNavigation();
   const colors = useThemeStore((s) => s.colors);
   const mode = useThemeStore((s) => s.mode);
+  const accentColor = useThemeStore((s) => s.accentColor);
+  const setAccentColor = useThemeStore((s) => s.setAccentColor);
   const toggleTheme = useThemeStore((s) => s.toggleTheme);
 
   const isMinimalist = useUIStore((s) => s.isMinimalistMode);
@@ -28,6 +33,26 @@ export default function Profile() {
   const user = useAuthStore((s) => s.user);
   const signOut = useAuthStore((s) => s.signOut);
   const updateUser = useAuthStore((s) => s.updateUser); // Need this action
+
+  const [hasSchedule, setHasSchedule] = React.useState(false);
+  const [isThemeDropdownOpen, setIsThemeDropdownOpen] = useState(false);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      async function checkSchedule() {
+        // Assuming getActiveTrainingSchedule returns null if none exists
+        // We need to verify the return type of getActiveTrainingSchedule.
+        // Based on observing other files, it likely returns a promise resolving to schedule or null/undefined.
+        try {
+          const schedule = await getActiveTrainingSchedule();
+          setHasSchedule(!!schedule);
+        } catch (e) {
+          setHasSchedule(false);
+        }
+      }
+      checkSchedule();
+    }, [])
+  );
 
   // Connect Logic
   const handleConnectAccount = async () => {
@@ -127,29 +152,58 @@ export default function Profile() {
             Training Plan
           </Text>
 
-          <Pressable
-            onPress={() => (navigation as any).navigate('OnboardingTrainingStyle', { title: 'Change your training style' })}
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              backgroundColor: colors.bg.secondary,
-              padding: spacing[4],
-              borderRadius: radius.lg,
-              borderWidth: 1,
-              borderColor: colors.border.subtle,
-            }}
-          >
-            <View>
-              <Text style={{ ...typography.body, color: colors.text.primary }}>
-                Change / Create Plan
-              </Text>
-              <Text style={{ ...typography.caption, color: colors.text.muted, marginTop: 4 }}>
-                Start a new training schedule
-              </Text>
-            </View>
-            <Text style={{ fontSize: 20, color: colors.text.muted }}>→</Text>
-          </Pressable>
+          <View style={{
+            marginTop: spacing[2],
+            backgroundColor: colors.bg.secondary,
+            padding: spacing[4],
+            borderRadius: radius.lg,
+            borderWidth: 1,
+            borderColor: colors.border.subtle,
+          }}>
+            {hasSchedule && (
+              <Pressable
+                onPress={() => (navigation as any).navigate('ScheduleViewer')}
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  paddingVertical: spacing[3],
+                  borderBottomWidth: 1,
+                  borderBottomColor: colors.border.subtle,
+                  marginBottom: spacing[3],
+                }}
+              >
+                <View>
+                  <Text style={{ ...typography.body, color: colors.text.primary }}>
+                    View Current Schedule
+                  </Text>
+                  <Text style={{ ...typography.caption, color: colors.text.muted, marginTop: 4 }}>
+                    See your active training days
+                  </Text>
+                </View>
+                <Text style={{ fontSize: 20, color: colors.text.muted }}>→</Text>
+              </Pressable>
+            )}
+
+            <Pressable
+              onPress={() => (navigation as any).navigate('OnboardingTrainingStyle', { title: 'Change your training style' })}
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <View>
+                <Text style={{ ...typography.body, color: colors.text.primary }}>
+                  Change / Create Plan
+                </Text>
+                <Text style={{ ...typography.caption, color: colors.text.muted, marginTop: 4 }}>
+                  Start a new training schedule
+                </Text>
+              </View>
+              <Text style={{ fontSize: 20, color: colors.text.muted }}>→</Text>
+            </Pressable>
+          </View>
         </View>
 
         {/* Settings Block */}
@@ -157,6 +211,66 @@ export default function Profile() {
           <Text style={{ ...typography.h3, color: colors.text.primary, marginBottom: spacing[4] }}>
             App Preferences
           </Text>
+
+          <View
+            style={{
+              backgroundColor: colors.bg.secondary,
+              padding: spacing[4],
+              borderRadius: radius.lg,
+              borderWidth: 1,
+              borderColor: colors.border.subtle,
+              marginBottom: spacing[3],
+            }}
+          >
+            <Text style={{ ...typography.body, color: colors.text.primary, marginBottom: spacing[3] }}>
+              Theme Style
+            </Text>
+            <View style={{ gap: 12 }}>
+              {(Object.keys(THEME_PRESETS) as ThemeAccent[]).map((accent) => {
+                const isActive = accentColor === accent;
+                const presetColors = THEME_PRESETS[accent];
+
+                // Labels for the presets
+                const labels: Record<string, string> = {
+                  energy: 'Energy (Green)',
+                  social: 'Social (Pink)',
+                  stream: 'Cinema (Red)',
+                  classic: 'Classic (Blue)',
+                  mono: 'Monochrome',
+                };
+
+                return (
+                  <Pressable
+                    key={accent}
+                    onPress={() => setAccentColor(accent)}
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      backgroundColor: isActive ? colors.bg.primary : 'transparent',
+                      padding: 8,
+                      borderRadius: radius.md,
+                      borderWidth: 1,
+                      borderColor: isActive ? colors.border.focused : 'transparent',
+                    }}
+                  >
+                    <View style={{
+                      width: 24,
+                      height: 24,
+                      borderRadius: 12,
+                      backgroundColor: presetColors.primary,
+                      marginRight: spacing[3],
+                      borderWidth: 1,
+                      borderColor: colors.border.subtle
+                    }} />
+                    <Text style={{ ...typography.bodySm, color: isActive ? colors.text.primary : colors.text.muted, flex: 1 }}>
+                      {labels[accent] || accent}
+                    </Text>
+                    {isActive && <Text style={{ color: colors.accent.primary }}>✓</Text>}
+                  </Pressable>
+                );
+              })}
+            </View>
+          </View>
 
           <View
             style={{

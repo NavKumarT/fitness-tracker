@@ -13,6 +13,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Play } from 'lucide-react-native'; // Assuming we use this icon often, or we pass children
 import { colors, radius, typography, spacing } from '../theme/tokens';
 import { useUIStore } from '../stores/uiStore';
+import { useThemeStore } from '../stores/themeStore';
 
 const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
 
@@ -23,8 +24,11 @@ type Props = PressableProps & {
     style?: ViewStyle;
 };
 
-export function BreathingGradientButton({ label, icon, colors: gradientColors = [colors.accent.primary, colors.accent.secondary], style, ...props }: Props) {
+export function BreathingGradientButton({ label, icon, colors: propColors, style, ...props }: Props) {
     const isMinimalist = useUIStore((s) => s.isMinimalistMode);
+    const themeColors = useThemeStore((s) => s.colors);
+
+    const gradientColors = propColors || [themeColors.accent.primary, themeColors.accent.secondary];
 
     // Animation Values
     const scale = useSharedValue(1);
@@ -72,16 +76,16 @@ export function BreathingGradientButton({ label, icon, colors: gradientColors = 
                     justifyContent: 'center',
                     paddingVertical: 12,
                     paddingHorizontal: spacing[6],
-                    backgroundColor: colors.bg.secondary,
+                    backgroundColor: themeColors.bg.secondary,
                     borderRadius: radius.full,
                     borderWidth: 1,
-                    borderColor: colors.border.subtle,
+                    borderColor: themeColors.border.subtle,
                     opacity: pressed ? 0.8 : 1,
                 }, style]}
                 {...props}
             >
                 {icon}
-                <Text style={{ ...typography.bodySm, fontWeight: '700', color: colors.text.primary, marginLeft: icon ? spacing[2] : 0 }}>
+                <Text style={{ ...typography.bodySm, fontWeight: '700', color: themeColors.text.primary, marginLeft: icon ? spacing[2] : 0 }}>
                     {label}
                 </Text>
             </Pressable>
@@ -93,7 +97,7 @@ export function BreathingGradientButton({ label, icon, colors: gradientColors = 
         <Animated.View style={[animatedStyle, { position: 'relative', alignItems: 'center', justifyContent: 'center' }, style]}>
             {/* Glow Layer behind */}
             <AnimatedLinearGradient
-                colors={gradientColors}
+                colors={gradientColors as any}
                 style={[
                     glowStyle,
                     {
@@ -103,7 +107,6 @@ export function BreathingGradientButton({ label, icon, colors: gradientColors = 
                         zIndex: -1,
                         opacity: 0.5,
                         transform: [{ scale: 1.05 }], // Slightly larger for glow
-                        blurRadius: 10 // Only works on simplified views, mostly simulating via opacity here on native without expo-blur
                     }
                 ]}
             />
@@ -111,7 +114,7 @@ export function BreathingGradientButton({ label, icon, colors: gradientColors = 
             <Pressable {...props} style={{ width: '100%', alignItems: 'center' }}>
                 {({ pressed }) => (
                     <LinearGradient
-                        colors={gradientColors}
+                        colors={gradientColors as any}
                         start={{ x: 0, y: 0 }}
                         end={{ x: 1, y: 1 }}
                         style={{
@@ -131,7 +134,7 @@ export function BreathingGradientButton({ label, icon, colors: gradientColors = 
                         }}
                     >
                         {icon}
-                        <Text style={{ ...typography.bodySm, fontWeight: '700', color: colors.bg.primary, marginLeft: icon ? spacing[2] : 0 }}>
+                        <Text style={{ ...typography.bodySm, fontWeight: '700', color: themeColors.bg.primary, marginLeft: icon ? spacing[2] : 0 }}>
                             {label}
                         </Text>
                     </LinearGradient>

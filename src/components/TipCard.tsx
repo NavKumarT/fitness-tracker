@@ -56,7 +56,7 @@ export default function TipCard({ message, onDismiss, delay = 1000, style }: Pro
                     <Lightbulb size={18} color={colors.accent.secondary} />
                 </View>
 
-                <View style={{ flex: 1 }}>
+                <View style={{ flex: 1, flexShrink: 1 }}>
                     <Text style={{ ...typography.caption, color: colors.text.primary, lineHeight: 20, flexWrap: 'wrap' }}>
                         {message}
                     </Text>

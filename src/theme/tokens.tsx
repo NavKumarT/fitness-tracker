@@ -25,6 +25,17 @@ const palette = {
   amber500: '#F59E0B',
 };
 
+export const THEME_PRESETS = {
+  emerald: { primary: '#34D399', secondary: '#10B981' },
+  blue: { primary: '#60A5FA', secondary: '#3B82F6' },
+  purple: { primary: '#A78BFA', secondary: '#8B5CF6' },
+  orange: { primary: '#F97316', secondary: '#EA580C' },
+  red: { primary: '#F87171', secondary: '#EF4444' },
+  pink: { primary: '#F472B6', secondary: '#EC4899' },
+};
+
+export type ThemeAccent = keyof typeof THEME_PRESETS;
+
 export const darkColors = {
   bg: {
     primary: palette.zinc950,

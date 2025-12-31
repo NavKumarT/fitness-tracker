@@ -131,7 +131,7 @@ export default function CycleBuilder() {
 
   function handleCreateCycle() {
     // 1️⃣ Create cycle schedule (single source of truth)
-    const scheduleId = createTrainingSchedule('cycle');
+    const scheduleId = createTrainingSchedule('cycle', cycleName);
 
     if (!scheduleId) {
       console.error('Failed to create cycle schedule');

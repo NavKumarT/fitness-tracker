@@ -245,3 +245,40 @@ export function getWeeklyConsistency(): { date: Date; hasWorkout: boolean }[] {
         hasWorkout: hasWorkoutOnDate(day)
     }));
 }
+
+export type LifetimeStats = {
+    totalWorkouts: number;
+    totalVolume: number; // kg/lbs
+    totalDurationMs: number;
+    currentStreak: number;
+};
+
+export function getLifetimeStats(): LifetimeStats {
+    // 1. Get Workout Level Stats (Count & Duration)
+    const workoutStats = db.getFirstSync<{ cnt: number; dur: number }>(`
+        SELECT 
+            COUNT(id) as cnt, 
+            COALESCE(SUM(duration), 0) as dur
+        FROM workouts
+        WHERE ended_at IS NOT NULL
+    `);
+
+    // 2. Get Volume Stats (Set Level)
+    const volumeStats = db.getFirstSync<{ vol: number }>(`
+        SELECT 
+            COALESCE(SUM(ws.weight * ws.reps), 0) as vol
+        FROM workout_sets ws
+        JOIN workout_exercises we ON ws.workout_exercise_id = we.id
+        JOIN workouts w ON we.workout_id = w.id
+        WHERE w.ended_at IS NOT NULL
+    `);
+
+    const streak = getWorkoutStreak();
+
+    return {
+        totalWorkouts: workoutStats?.cnt ?? 0,
+        totalVolume: volumeStats?.vol ?? 0, // kg/lbs
+        totalDurationMs: workoutStats?.dur ?? 0,
+        currentStreak: streak
+    };
+}
